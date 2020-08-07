@@ -1,0 +1,47 @@
+.commentlinks {
+    padding: 5px 0 5px 0;
+}
+.commenticon {
+    font-size: 12px;
+    vertical-align: bottom;
+}
+.showhidebutton {
+    cursor: pointer;
+}
+
+.showhidebutton:hover {
+    text-decoration: underline;
+}
+.commentlinkalign, .commentcontext {
+    vertical-align: super;
+}
+
+@keyframes hideanim {
+    0% {
+        opacity: 1;
+        padding: initial;
+        margin: initial;
+        max-height: 10000px;
+    }
+    100% {
+        opacity: 0;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+    }
+}
+
+.showhidebuttonbox:not(:checked) ~ div, .commentclicked:not(:checked) ~ .qr_postform {
+    opacity: 1;
+    max-height: 10000px;
+    transition: opacity 1s ease-in;
+}
+
+.showhidebuttonbox:checked ~ div, .commentclicked:checked ~ .qr_postform {
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    transition: all 650ms cubic-bezier(0,.99,.17,1);
+    overflow: hidden;
+}
