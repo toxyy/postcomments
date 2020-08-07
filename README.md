@@ -6,6 +6,8 @@
 
 phpBB 3.2+ PHP 7+, with two unmerged commits to phpbb (will add links later)
 
+This is HIGHLY experimental and almost everything making the comments is not done yet.  Do NOT install this on your live forum as it is right now.
+
 ## Features
 
 This extension adds threaded functionality within phpbb
