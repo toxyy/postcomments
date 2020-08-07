@@ -10,7 +10,7 @@ phpBB 3.2+ PHP 7+, with two unmerged commits to phpbb (will add links later)
 
 This extension adds threaded functionality within phpbb
 
-Threads can go up to a predefined depth, with theoretically no limit\
+Threads can go up to a predefined depth, with theoretically no limit
 
 ## Screenshot
 
@@ -20,7 +20,7 @@ You can install this on the latest release of phpBB 3.2 by following the steps b
 
 * Create `toxyy/postcomments` in the `ext` directory.
 * Download and unpack the repository into `ext/toxyy/postcomments`
-* Enable `Show Topic Starter` in the ACP at `Customise -> Manage extensions`.
+* Enable `Post Comments` in the ACP at `Customise -> Manage extensions`.
 
 ## Uninstall
 
