@@ -1,0 +1,51 @@
+NI = not important for dev topic/forum release
+left to do for post comments:
+	[ ] fix deleting posts
+		[X] soft delete takes care of most use cases, users can see them and they reflect in viewtopic/viewforum postcount and pagination with the pull requests
+		[X] need to remove whole tree for permanent option
+		[X] mostly done and kinda working YEAH!
+		[ ] find solution to array_flip(array_flip())
+		[ ] fix parent's comment count
+		[ ] fix thread's post count
+		[ ] check notifications
+		[ ] take a look to see if soft deleted posts count towards total board stats/forum stats
+	[ ] fix moving posts
+		[ ] move just the post or whole tree?
+	[ ] add root (full too maybe?) & parent button next to conext
+	[ ] do the whole acp
+		[ ] add option for removing all user info from posts except username and pm button to make comments more compact
+		[ ] add acp config for default sort direction per forum
+		[ ] add config option for quick reply per forum
+NI	[ ] take a look at the search page
+NI	[ ] check post review list (when making a post), see if it needs any work. probably show only current depth, maybe parent post at top?
+NI	[ ] make sure everything looks ok in modcp
+NI	[ ] fix sorting once and for all for all current options
+		[ ] topics
+		[ ] modcp
+		[ ] post review?
+		[ ] search?
+		[ ] SUPER BONUS: add sorting option/compatability for thanks for posts/post reactions/post love :)
+	[ ] --- possibly move the monster sql query to a controller/helper
+	[X] add quick reply
+		[X] add message to preview if full message clicked
+		[X] parent_id doesn't get transferred to table - fixed, &amp; was broke on qreply=
+		[ ] fix for context pages
+		[ ] drafts dont work
+		[ ] guest posting? or just make it default link?
+		[ ] ajaxify submit
+	[ ] add show more button
+		[ ] no javascript solution
+			[ ] need array in url params... such as postid,expandcount,postid,expandcount etc
+		[ ] ajaxify it
+NI	[ ] should quoting be on the same depth level as that comment?
+NI	[ ] add @mention extension support for comments at max depth (from what i can tell this is just adding [mention]username[/mention] instead of quote
+		[ ] should it be @mention support, or fake @mention? such as, @username (link to post with anchor?)? option in acp for making it postid instead?
+NI	[ ] add route for closure table path, makes it cleaner in code
+NI	[ ] take a look at notifications - yep, need to make it just like quote but link to context? in topic link if depth/rowcount is ok?
+NI	[ ] should last post link REALLY be the last comment, or last post of depth n?
+NI	[ ] add migrations
+[ ] review code for errors inefficiencies, make things cleaner
+	[ ] check for errors
+	[ ] sql transactions?
+[ ] install on test board
+	[ ] configure board
