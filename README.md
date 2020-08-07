@@ -9,6 +9,7 @@ phpBB 3.2+ PHP 7+, with two unmerged commits to phpbb (will add links later)
 ## Features
 
 This extension adds threaded functionality within phpbb
+
 Threads can go up to a predefined depth, with theoretically no limit\
 
 ## Screenshot
