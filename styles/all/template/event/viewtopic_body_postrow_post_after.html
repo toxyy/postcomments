@@ -1,0 +1,115 @@
+{# need to write in max depth from config here #}
+{% set maxdepth = 5 %}
+{% set collapsedepth = 3 %}
+{# add support for quickreply acp option that i need to add... #}
+{% if 1 == 0 %}
+        {% set commentlink = postrow.U_COMMENT %}
+{% endif %}
+{% set commentlink = 'javascript:void(0);' %}
+{% set fixeddepth = postrow.POST_DEPTH %}
+{% set fixedcontextlink = postrow.U_COMMENT_CONTEXT %}
+{% if postrow.S_CONTEXT_DEPTH > 0 %}
+        {% set maxdepth = (maxdepth + postrow.S_CONTEXT_DEPTH - 1) %}
+        {% set collapsedepth = (3 + (postrow.S_CONTEXT_DEPTH - 1)) %}
+        {% set fixeddepth = (postrow.POST_DEPTH - (postrow.S_CONTEXT_DEPTH - 1)) %}
+        {% set fixedcontextlink = '' ~ (postrow.S_IS_CONTEXT)? '#p' ~ postrow.POST_ID : fixedcontextlink %}
+{% endif %}
+{# define quickreply block, but don't show it #}
+{% if 1 == 0 %}
+        {% block quickreply %}
+                <br>
+                <form method="post" action="{postrow.U_COMMENT}" class="qr_postform" id="qr_postform{{ postrow.POST_ID }}" style="margin-left: -{{ linkcssfix }}%;">
+                        <div class="panel">
+                                <div class="inner">
+                                                <h2 class="quickreply-title">{L_QUICKREPLY}</h2>
+                                                <fieldset class="fields1">
+                                                <dl style="clear: left; display: none;">
+                                                        <dt><label for="subject">{L_SUBJECT}{L_COLON}</label></dt>
+                                                        <dd><input type="text" name="subject" id="subject" size="45" maxlength="124" tabindex="2" value="{SUBJECT}" class="inputbox autowidth" /></dd>
+                                                </dl>
+                                                <div id="message-box" class="message-box">
+                                                        <textarea style="height: 7em;" name="message" rows="7" cols="76" tabindex="3" class="inputbox"></textarea>
+                                                </div>
+                                                </fieldset>
+                                                <fieldset class="submit-buttons">
+                                                        {S_FORM_TOKEN}
+                                                        {postrow.QR_COMMENT_HIDDEN_FIELDS}
+                                                        <input type="submit" accesskey="f" tabindex="6" name="preview" value="{L_FULL_EDITOR}" class="button1 button button-form-bold" id="qr_full_editor" />&nbsp;
+                                                        <input type="submit" accesskey="s" tabindex="7" name="post" value="{L_SUBMIT}" class="button1 button button-form" />&nbsp;
+                                                </fieldset>
+                                </div>
+                        </div>
+                </form>
+        {% endblock %}
+{% endif %}
+<div class="showhidecom{{ postrow.POST_ID }}" style="padding-left: {{ (100 / (10 - fixeddepth))|round(2, 'floor') }}%;">
+        {% set linkcssfix = (100 / (9 - fixeddepth))|round(2, 'floor') %}
+        {% set iscontext = (postrow.S_IS_CONTEXT > 0) %}
+        {% set contexttext = '' ~ (iscontext) ? '<strong>Context</strong>' : 'Context' %}
+        {% set commentcontextlink = '&nbsp;&nbsp;<a href="'~ fixedcontextlink ~'" class="commentcontext" id="commentcontext'~ postrow.POST_ID ~'" title="Comment context">'~ contexttext ~'</a>' %}
+        &nbsp;
+        {# add quickpost acp setting #}
+        {% if 1 == 0 %}
+                <a href="{{ commentlink }}" class="commentlinkalign" title="Comments" style="margin-left: -{{ linkcssfix }}%;">
+                    <i class="commentdownarrow fa fa-reply fa-rotate-180"></i> <i class="commenticon fa fa-comments"></i> Comment
+                </a>
+        {% else %}
+                <style>
+                        input[type=checkbox]:not(:checked) ~ #commentclicked{{ postrow.POST_ID }} a:after {
+                            content: "Hide";
+                        }
+                        input[type=checkbox]:checked ~ #commentclicked{{ postrow.POST_ID }} a:after {
+                            content: "Comment";
+                        }
+                </style>
+                <input type="checkbox" name="commentclicked{{ postrow.POST_ID }}" id="commentclicked{{ postrow.POST_ID }}" class="commentclicked" style="display: none;" checked="">
+                <label for="commentclicked{{ postrow.POST_ID }}" id="commentclicked{{ postrow.POST_ID }}" class="commentclicked" style="margin-left: -{{ linkcssfix }}%; padding-right: 0;">
+                        <a class="commentlinkalign">
+                                <i class="commentdownarrow fa fa-reply fa-rotate-180"></i> <i class="commenticon fa fa-comments"></i>
+                        </a>
+                </label>
+        {% endif %}
+        {% if postrow.POST_COMMENTS > 0 && fixeddepth < maxdepth %}
+                <style>
+                    input[type=checkbox]:checked ~ #showhidebutton{{ postrow.POST_ID }} a:before {
+                        content: "Show ({{ postrow.POST_COMMENTS }})";
+                    }
+                    input[type=checkbox]:not(:checked) ~ #showhidebutton{{ postrow.POST_ID }} a:before {
+                        content: "Hide";
+                    }
+                    .showhidecom{{ postrow.POST_ID }} {
+                        border-left: 1px solid transparent;
+                        border-image: radial-gradient(transparent, rgba(175, 175, 175, {{ ((6 - fixeddepth) / 7)|round(2, 'floor') }}), transparent);
+                        border-image-slice: 1;
+                    }
+                    {#.showhidecom{{ postrow.POST_ID }}:hover {
+                        border-left: 1px solid #F6F4D0;
+                        border-image: unset;
+                    }#}
+                {% if postrow.HIDDEN_CSS == 1 %}
+                    #post_hidden{{ postrow.POST_ID }} {
+                    position: absolute;
+                    }
+                {% endif %}
+                </style>
+                {{ commentcontextlink }}
+                &nbsp;
+                <input type="checkbox" name="showhidebutton{{ postrow.POST_ID }}" id="showhidebutton{{ postrow.POST_ID }}" class="showhidebuttonbox" style="display: none;" {{ (postrow.POST_DEPTH >= collapsedepth) ? 'checked' }}>
+                <label for="showhidebutton{{ postrow.POST_ID }}" id="showhidebutton{{ postrow.POST_ID }}" class="showhidebutton commentlinkalign" style="font-weight: 900;">
+                        <a class="showhidelink"></a>
+                </label>
+                {{ block('quickreply') }}
+        {% else %}
+                {% if postrow.POST_DEPTH == maxdepth %}
+                        &nbsp;&nbsp;<a href="{{ postrow.U_COMMENT_CONTEXT }}" class="commentcontext" id="commentcontext{{ postrow.POST_ID }}}" title="Comment context">{{ contexttext }}{{ (postrow.POST_COMMENTS > 0) ? ' <strong>(show more)' }}</strong></a>
+                {% else %}
+                        {{ commentcontextlink }}
+                        {{ block('quickreply') }}
+                {% endif %}
+                </div>
+        {% endif %}
+{% if postrow.LAST_COMMENT >= 1%}
+        {% for i in 1..(postrow.LAST_COMMENT) %}
+                </div>
+        {% endfor %}
+{% endif %}
