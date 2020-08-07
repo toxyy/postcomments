@@ -24,7 +24,7 @@ You can install this on the latest release of phpBB 3.2 by following the steps b
 
 ## Uninstall
 
-* Disable `Show Topic Starter` in the ACP at `Customise -> Extension Management -> Extensions`.
+* Disable `Post Comments` in the ACP at `Customise -> Extension Management -> Extensions`.
 * To permanently uninstall, click `Delete Data`. Optionally delete the `/ext/toxyy/postcomments` directory.
 
 ## Support
