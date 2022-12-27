@@ -9,12 +9,14 @@ phpBB 3.2+ PHP 7+, with two unmerged commits to phpbb (will add links later)
 Almost everything besides making the comments is not done yet.  Do NOT install this on your live forum as it is right now.
 
 ## Features
-
 This extension adds threaded functionality within phpbb
 
 Threads can go up to a predefined depth, with theoretically no limit
 
-## Screenshot
+## Video Preview
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YGyavxkvoIM" target="_blank">
+ <img src="http://img.youtube.com/vi/YGyavxkvoIM/mqdefault.jpg" alt="Watch the video" width="240" height="180" border="10" />
+</a>
 
 ## Quick Install
 
